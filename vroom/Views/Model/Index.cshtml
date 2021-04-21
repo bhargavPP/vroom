@@ -1,0 +1,52 @@
+﻿@model IEnumerable<vroom.Models.Model>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+
+<div class="row">
+    <div class="col-10">
+        <h2 class="text-info">Model of Vehicle</h2>
+    </div>
+    <div class="col-2 text-right">
+        <a class="btn btn-info" asp-action="Create"><i class="fas fa-motorcycle"></i>Add New Model</a>
+    </div>
+    <br />
+    <div>
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(m => m.Make)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Name)
+                </th>
+                <th>
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Make.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    @*<td class="text-end">
+                        <div class="btn-group" role="group">
+                            <a type="button" class="btn btn-primary" href="@Url.Action("Edit","Model",new { Id = item.Id })"><i class="fas fa-edit"></i>Edit</a>
+                            <form method="post" asp-action="Delete">
+                                <button type="submit" onclick="if(!confirm('Are you sure want to Delete?')) { return false}" class="btn btn-danger" asp-route-id="@item.Id" asp-action="Delete"><i class="fas fa-trash-alt"></i>Delete </button>
+                            </form>
+                        </div>
+                    </td>*@
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </tr>
+            }
+        </table>
+    </div>
+</div>
